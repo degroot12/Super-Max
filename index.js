@@ -32,6 +32,9 @@ bgImg.src = 'images/backgroundColorGrass.png'
 bgImg.width = canvas.width
 bgImg.height = canvas.height
 
+let curbs = document.createElement('img')
+curbs.src = 'images/curbs.png'
+
 let maxImg = document.createElement('img');
 maxImg.src = 'images/MaxCarScaled.png'
 
@@ -90,6 +93,14 @@ function draw(){
 
     superMaxSound.play()
     
+    ctx.beginPath()
+    ctx.fillStyle = "gray"
+    ctx.fillRect(0, 720, canvas.width, 11);
+    ctx.stroke()
+    ctx.closePath()
+
+    ctx.drawImage(curbs, 0, 685)
+
        
     for(let i = 0; i <cars.length; i++){
         ctx.drawImage(carImg, cars[i].x, cars[i].y)
