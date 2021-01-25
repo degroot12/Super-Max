@@ -7,8 +7,10 @@ let penaltyPoints = 0;
 let hamiltonScore = 120;
 
 let superMaxSound = new Audio()
+superMaxSound.src = 'sounds/superMaxLowSound.mp3'
 
-superMaxSound.src = 'sounds/superMaxSound.mp3'
+let lewisWinSound = new Audio()
+lewisWinSound.src = 'sounds/losingSound.mp3'
 
 let startGameBtn = document.querySelector('.startGameBtn')
 let splash = document.querySelector('.splash')
@@ -19,25 +21,24 @@ bgImg.width = canvas.width
 bgImg.height =canvas.height
 
 let maxImg = document.createElement('img');
-maxImg.src = 'images/formula.png'
-maxImg.height = 90
-maxImg.width = 90
+maxImg.src = 'images/MaxCarScaled.png'
 
 let carImg = document.createElement('img')
-carImg.src = 'images/truckcabin.png'
+carImg.src = 'images/CharlesCar.png'
 
 let pointsImg = document.createElement('img')
 pointsImg.src = 'images/platformPack_item002.png'
 
-let cars = [{x: canvas.width + 10, y:685}]
+let cars = [{x: canvas.width + 10, y:650}]
 
-let points = [{x: canvas.width + 50, y:670}]
+let points = [{x: canvas.width + 50, y: 670}]
 
-let oilPatch = [{x: canvas.width + 100, y: 670}]
+let oilPatch = [{x: canvas.width + 100, y: 720}]
 
 
 const maxX = 100;
-let maxY = 700;
+let maxY = 650;
+console.log(maxImg.height)
 maxIncrement = 0
 
 startGameBtn.addEventListener('click', () => {
@@ -52,7 +53,7 @@ document.addEventListener('keydown', (event) => {
        return
     }
    maxIncrement = -5
-   if(maxY <=650){
+   if(maxY <=500){
     maxIncrement = 1
    }
 })
@@ -65,7 +66,7 @@ document.addEventListener('keyup', () => {
 function draw(){
     ctx.drawImage(bgImg, 0, 0)
 
-    superMaxSound.play();
+    //superMaxSound.play()
     
        
     for(let i = 0; i <cars.length; i++){
@@ -75,7 +76,7 @@ function draw(){
         if(cars[i].x == 200){
             cars.push({
                 x:canvas.width + 60,
-                y: 685
+                y: 650
             })
         }
 
@@ -84,7 +85,7 @@ function draw(){
         for(let i = 0; i <oilPatch.length; i++){
         ctx.beginPath()
         ctx.fillStyle = "black"
-        ctx.fillRect(oilPatch[i].x, 709, 20, 2);
+        ctx.fillRect(oilPatch[i].x, 720, 50, 5);
         ctx.stroke()
         ctx.closePath()
         oilPatch[i].x--
@@ -92,14 +93,15 @@ function draw(){
         if(oilPatch[i].x == 500){
             oilPatch.push({
                 x:canvas.width + 60,
-                y: 685
+                y: 720
             })
         }
-        if(maxX == oilPatch[i].x && maxY >= oilPatch[i].y){
+        if(maxX+maxImg.width== oilPatch[i].x && maxY >= oilPatch[i].y - 71){
             score = score -12
             penaltyPoints++
             if(penaltyPoints >= 3){
                 clearInterval()
+                //lewisWinSound.play()
                 splash.style.display = 'flex'
             }
         }
@@ -116,7 +118,7 @@ function draw(){
                 y: 670
             })
         }
-        if(maxX == points[i].x && maxX  <= points[i].x + pointsImg.width && maxY >= points[i].y){
+        if(maxX+maxImg.width == points[i].x && maxX  <= points[i].x + pointsImg.width -5 && maxY >= points[i].y -90 + pointsImg.height){
             score = score +25
             points.splice(i, 1)
             points.push({
@@ -129,7 +131,7 @@ function draw(){
     
             }
         }
-        if(maxX == cars[i].x && maxY >= points[i].y){
+        if(maxX+maxImg.width == cars[i].x && maxY >= points[i].y -70){
             score = score -12
             penaltyPoints++
         }
@@ -153,7 +155,7 @@ function draw(){
 
     maxY += maxIncrement
 
-    if(maxY >=700){
+    if(maxY >=650){
         maxIncrement = 0
     }
 }
