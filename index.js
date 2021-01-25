@@ -4,7 +4,7 @@ canvas.style.border = '2px solid black'
 let intervalID = 0;
 let score = 0;
 let penaltyPoints = 0;
-let hamiltonScore = 120;
+let hamiltonScore = 350;
 
 let superMaxSound = new Audio()
 superMaxSound.src = 'sounds/superMaxLowSound.mp3'
@@ -12,13 +12,25 @@ superMaxSound.src = 'sounds/superMaxLowSound.mp3'
 let lewisWinSound = new Audio()
 lewisWinSound.src = 'sounds/losingSound.mp3'
 
+let victoryMusic = new Audio()
+victoryMusic.src = 'sounds/victoryMusic.mp3'
+
 let startGameBtn = document.querySelector('.startGameBtn')
 let splash = document.querySelector('.splash')
+
+let playAgainBtn = document.querySelector('.playAgainBtn')
+
+playAgainBtnWin = document.querySelector('.playAgainBtnWin')
+
+let lewisWins = document.querySelector('.losing-screen')
+
+let maxWins = document.querySelector('.victory-screen')
+
 
 let bgImg = document.createElement('img');
 bgImg.src = 'images/backgroundColorGrass.png'
 bgImg.width = canvas.width
-bgImg.height =canvas.height
+bgImg.height = canvas.height
 
 let maxImg = document.createElement('img');
 maxImg.src = 'images/MaxCarScaled.png'
@@ -43,9 +55,19 @@ maxIncrement = 0
 
 startGameBtn.addEventListener('click', () => {
     splash.style.display = 'none'
+    lewisWins.style.display = 'none'
+    maxWins.style.display = 'none'
     intervalID = setInterval(() => {
         requestAnimationFrame(draw)
     }, 1)
+})
+
+playAgainBtn.addEventListener('click', () => {
+    location.reload();
+})
+
+playAgainBtnWin.addEventListener('click', () => {
+    location.reload();
 })
 
 document.addEventListener('keydown', (event) => {
@@ -59,21 +81,21 @@ document.addEventListener('keydown', (event) => {
 })
 
 document.addEventListener('keyup', () => {
-    maxIncrement = 1
+    maxIncrement = 2
 })
 
 
 function draw(){
     ctx.drawImage(bgImg, 0, 0)
 
-    //superMaxSound.play()
+    superMaxSound.play()
     
        
     for(let i = 0; i <cars.length; i++){
         ctx.drawImage(carImg, cars[i].x, cars[i].y)
-        cars[i].x--
+        cars[i].x = cars[i].x -2
 
-        if(cars[i].x == 200){
+        if(cars[i].x <= 25 && cars[i].x >= 23){
             cars.push({
                 x:canvas.width + 60,
                 y: 650
@@ -88,7 +110,7 @@ function draw(){
         ctx.fillRect(oilPatch[i].x, 720, 50, 5);
         ctx.stroke()
         ctx.closePath()
-        oilPatch[i].x--
+        oilPatch[i].x = oilPatch[i].x -2
 
         if(oilPatch[i].x == 500){
             oilPatch.push({
@@ -96,13 +118,15 @@ function draw(){
                 y: 720
             })
         }
-        if(maxX+maxImg.width== oilPatch[i].x && maxY >= oilPatch[i].y - 71){
+        if(maxX+maxImg.width== oilPatch[i].x -4 && maxY >= oilPatch[i].y - 71){
             score = score -12
             penaltyPoints++
-            if(penaltyPoints >= 3){
-                clearInterval()
-                //lewisWinSound.play()
-                splash.style.display = 'flex'
+            if(penaltyPoints >= 20){
+                superMaxSound.src = ""
+                lewisWinSound.play()
+                clearInterval(intervalID)
+                
+                lewisWins.style.display = 'flex'
             }
         }
 
@@ -118,7 +142,7 @@ function draw(){
                 y: 670
             })
         }
-        if(maxX+maxImg.width == points[i].x && maxX  <= points[i].x + pointsImg.width -5 && maxY >= points[i].y -90 + pointsImg.height){
+        if(maxX+maxImg.width >= points[i].x +30 && maxX  <= points[i].x + pointsImg.width  && maxY >= points[i].y -90 + pointsImg.height){
             score = score +25
             points.splice(i, 1)
             points.push({
@@ -126,18 +150,30 @@ function draw(){
                 y: 670
             })
             if(score >= hamiltonScore){
-                clearInterval();
-                splash.style.display = 'flex'
+                superMaxSound.src = ""
+                hamiltonScore.src = ""
+                victoryMusic.play()
+                clearInterval(intervalID);
+                maxWins.style.display = 'flex'
+                
     
             }
         }
-        if(maxX+maxImg.width == cars[i].x && maxY >= points[i].y -70){
+        if(maxX+maxImg.width >= cars[i].x -2 && maxX  <= cars[i].x + carImg.width && maxY >= cars[i].y ){
             score = score -12
             penaltyPoints++
+            cars.splice(i, 1)
+            cars.push({
+                x:canvas.width + 60,
+                y: 650
+            })
+            if(penaltyPoints >= 10){
+                superMaxSound.src = ""
+                lewisWinSound.play()
+                clearInterval()
+                lewisWins.style.display = 'flex'
+            }
         }
-        
-        
-
     }
 
     
