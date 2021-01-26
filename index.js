@@ -4,7 +4,7 @@ canvas.style.border = '2px solid black'
 let intervalID = 0;
 let score = 0;
 let penaltyPoints = 0;
-let hamiltonScore = 350;
+let hamiltonScore = 240;
 
 let superMaxSound = new Audio()
 superMaxSound.src = 'sounds/superMaxLowSound.mp3'
@@ -22,7 +22,7 @@ let splash = document.querySelector('.splash')
 
 let playAgainBtn = document.querySelector('.playAgainBtn')
 
-playAgainBtnWin = document.querySelector('.playAgainBtnWin')
+let playAgainBtnWin = document.querySelector('.playAgainBtnWin')
 
 let lewisWins = document.querySelector('.losing-screen')
 
@@ -95,9 +95,6 @@ playAgainBtnWin.addEventListener('click', () => {
     location.reload();
 })
 
-// document.addEventListener("keydown", controller.keyListener)
-// document.addEventListener("keyup", controllers.keyListener)
-
 document.addEventListener('keydown', (event) => {
     if(event.keyCode == 32 && jumping === false){
         maxIncrement = -5
@@ -117,22 +114,10 @@ document.addEventListener('keyup', () => {
 function draw(){
     ctx.drawImage(bgImg, 0, 0)
 
-    superMaxSound.play()
+    //superMaxSound.play()
     
 
-    // if(controllers.up && playerCar.jumping == false){
-    //     playerCar.yVelocity -= 20;
-    //     playerCar.jumping = true
-    // }
-
-    // playerCar.yVelocity += 1.5;
-    // playerCar.y += playerCar.yVelocity
-
-    // if(playerCar.y > 650){
-    //     playerCar.jumping = false;
-    //     playerCar.y = 650;
-    //     playerCar.yVelocity = 0;
-    // }
+   
     
     ctx.beginPath()
     ctx.fillStyle = "gray"
@@ -147,16 +132,35 @@ function draw(){
         ctx.drawImage(carImg, cars[i].x, cars[i].y)
         cars[i].x = cars[i].x -2
 
-        if(cars[i].x == 80 ){
+        if(cars[i].x == 194 ){
             cars.push({
                 x:canvas.width + 10,
                 y: 650
             })
         }
 
+        if(maxX+maxImg.width >= cars[i].x +30 && maxX  <= cars[i].x + carImg.width && maxY >= cars[i].y ){
+            score = score -12
+            penaltyPoints++
+            cars.splice(i, 1)
+            // cars.push({
+            //     x:canvas.width + 60,
+            //     y: 650
+            // })
+            if(penaltyPoints >= 10){
+                superMaxSound.src = ""
+                //lewisWinSound.play()
+                clearInterval(intervalID)
+                lewisWins.style.display = 'flex'
+            }
+        }
+
     }
 
-        for(let i = 0; i <oilPatch.length; i++){
+
+
+
+    for(let i = 0; i <oilPatch.length; i++){
         ctx.beginPath()
         ctx.fillStyle = "black"
         ctx.fillRect(oilPatch[i].x, 720, 50, 5);
@@ -170,12 +174,12 @@ function draw(){
                 y: 720
             })
         }
-        if(maxX+maxImg.width== oilPatch[i].x -4 && maxY >= oilPatch[i].y - 71){
+        if(maxX+maxImg.width== oilPatch[i].x +30 && maxY >= oilPatch[i].y - 71){
             score = score -12
             penaltyPoints++
             if(penaltyPoints >= 10){
                 superMaxSound.src = ""
-                lewisWinSound.play()
+                //lewisWinSound.play()
                 clearInterval(intervalID)
                 
                 lewisWins.style.display = 'flex'
@@ -211,21 +215,7 @@ function draw(){
     
             }
         }
-        if(maxX+maxImg.width >= cars[i].x -2 && maxX  <= cars[i].x + carImg.width && maxY >= cars[i].y ){
-            score = score -12
-            penaltyPoints++
-            cars.splice(i, 1)
-            cars.push({
-                x:canvas.width + 60,
-                y: 650
-            })
-            if(penaltyPoints >= 10){
-                superMaxSound.src = ""
-                //lewisWinSound.play()
-                clearInterval()
-                lewisWins.style.display = 'flex'
-            }
-        }
+     
     }
 
     
@@ -242,8 +232,6 @@ function draw(){
     ctx.fillText('Hamilton: ' + hamiltonScore, canvas.width-150, 30)
 
  
-
-
     maxY += maxIncrement
 
     if(maxY >=650){
@@ -251,5 +239,3 @@ function draw(){
         jumping = false
     }
 }
-
-
