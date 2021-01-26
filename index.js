@@ -15,6 +15,8 @@ lewisWinSound.src = 'sounds/losingSound.mp3'
 let victoryMusic = new Audio()
 victoryMusic.src = 'sounds/victoryMusic.mp3'
 
+
+
 let startGameBtn = document.querySelector('.startGameBtn')
 let splash = document.querySelector('.splash')
 
@@ -29,8 +31,6 @@ let maxWins = document.querySelector('.victory-screen')
 
 let bgImg = document.createElement('img');
 bgImg.src = 'images/backgroundColorGrass.png'
-bgImg.width = canvas.width
-bgImg.height = canvas.height
 
 let curbs = document.createElement('img')
 curbs.src = 'images/curbs.png'
@@ -51,15 +51,37 @@ let points = [{x: canvas.width + 50, y: 670}]
 let oilPatch = [{x: canvas.width + 100, y: 720}]
 
 
+
+let jumping = false
+
 const maxX = 100;
 let maxY = 650;
-console.log(maxImg.height)
 maxIncrement = 0
+
+// const playerCar = {
+//     height: maxImg.height,
+//     jumping: true,
+//     width: maxImg.width,
+//     x: maxX,
+//     y:maxY,
+//     yVelocity: 0
+// }
+
+// const controllers = {
+//     up: false,
+//     keyListener: function (event){
+//         let key_state = (event.type == 'keydown') ? true : false;
+//         controllers.up = key_state
+//     }
+// }
+
+
 
 startGameBtn.addEventListener('click', () => {
     splash.style.display = 'none'
     lewisWins.style.display = 'none'
     maxWins.style.display = 'none'
+    splash.remove();
     intervalID = setInterval(() => {
         requestAnimationFrame(draw)
     }, 1)
@@ -73,14 +95,18 @@ playAgainBtnWin.addEventListener('click', () => {
     location.reload();
 })
 
+// document.addEventListener("keydown", controller.keyListener)
+// document.addEventListener("keyup", controllers.keyListener)
+
 document.addEventListener('keydown', (event) => {
-    if(event.key == 32){
-       return
+    if(event.keyCode == 32 && jumping === false){
+        maxIncrement = -5
+        jumping = true
+        if(maxY <=500){
+         maxIncrement = 1
+        }
     }
-   maxIncrement = -5
-   if(maxY <=500){
-    maxIncrement = 1
-   }
+   
 })
 
 document.addEventListener('keyup', () => {
@@ -92,6 +118,21 @@ function draw(){
     ctx.drawImage(bgImg, 0, 0)
 
     superMaxSound.play()
+    
+
+    // if(controllers.up && playerCar.jumping == false){
+    //     playerCar.yVelocity -= 20;
+    //     playerCar.jumping = true
+    // }
+
+    // playerCar.yVelocity += 1.5;
+    // playerCar.y += playerCar.yVelocity
+
+    // if(playerCar.y > 650){
+    //     playerCar.jumping = false;
+    //     playerCar.y = 650;
+    //     playerCar.yVelocity = 0;
+    // }
     
     ctx.beginPath()
     ctx.fillStyle = "gray"
@@ -106,9 +147,9 @@ function draw(){
         ctx.drawImage(carImg, cars[i].x, cars[i].y)
         cars[i].x = cars[i].x -2
 
-        if(cars[i].x <= 25 && cars[i].x >= 23){
+        if(cars[i].x == 80 ){
             cars.push({
-                x:canvas.width + 60,
+                x:canvas.width + 10,
                 y: 650
             })
         }
@@ -132,7 +173,7 @@ function draw(){
         if(maxX+maxImg.width== oilPatch[i].x -4 && maxY >= oilPatch[i].y - 71){
             score = score -12
             penaltyPoints++
-            if(penaltyPoints >= 20){
+            if(penaltyPoints >= 10){
                 superMaxSound.src = ""
                 lewisWinSound.play()
                 clearInterval(intervalID)
@@ -147,7 +188,7 @@ function draw(){
         ctx.drawImage(pointsImg, points[i].x, points[i].y)
         points[i].x--
 
-        if(points[i].x == 20){
+        if(points[i].x == 40){
             points.push({
                 x:canvas.width + 60,
                 y: 670
@@ -180,7 +221,7 @@ function draw(){
             })
             if(penaltyPoints >= 10){
                 superMaxSound.src = ""
-                lewisWinSound.play()
+                //lewisWinSound.play()
                 clearInterval()
                 lewisWins.style.display = 'flex'
             }
@@ -200,10 +241,14 @@ function draw(){
     ctx.font = '20px Verdana'
     ctx.fillText('Hamilton: ' + hamiltonScore, canvas.width-150, 30)
 
+ 
+
+
     maxY += maxIncrement
 
     if(maxY >=650){
         maxIncrement = 0
+        jumping = false
     }
 }
 
