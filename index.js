@@ -4,16 +4,19 @@ canvas.style.border = '2px solid black'
 let intervalID = 0;
 let score = 0;
 let penaltyPoints = 0;
-let hamiltonScore = 240;
+let hamiltonScore = 60;
 
 let superMaxSound = new Audio()
 superMaxSound.src = 'sounds/superMaxLowSound.mp3'
+superMaxSound.volume = 0.5
 
 let lewisWinSound = new Audio()
 lewisWinSound.src = 'sounds/losingSound.mp3'
+lewisWinSound.volume = 0.5
 
 let victoryMusic = new Audio()
 victoryMusic.src = 'sounds/victoryMusic.mp3'
+victoryMusic.volume = 0.5
 
 
 
@@ -77,6 +80,7 @@ maxIncrement = 0
 
 
 
+
 startGameBtn.addEventListener('click', () => {
     splash.style.display = 'none'
     lewisWins.style.display = 'none'
@@ -99,9 +103,6 @@ document.addEventListener('keydown', (event) => {
     if(event.keyCode == 32 && jumping === false){
         maxIncrement = -5
         jumping = true
-        if(maxY <=500){
-         maxIncrement = 1
-        }
     }
    
 })
@@ -114,7 +115,8 @@ document.addEventListener('keyup', () => {
 function draw(){
     ctx.drawImage(bgImg, 0, 0)
 
-    //superMaxSound.play()
+    
+    superMaxSound.play()
     
 
    
@@ -149,7 +151,7 @@ function draw(){
             // })
             if(penaltyPoints >= 10){
                 superMaxSound.src = ""
-                //lewisWinSound.play()
+                lewisWinSound.play()
                 clearInterval(intervalID)
                 lewisWins.style.display = 'flex'
             }
@@ -179,7 +181,7 @@ function draw(){
             penaltyPoints++
             if(penaltyPoints >= 10){
                 superMaxSound.src = ""
-                //lewisWinSound.play()
+                lewisWinSound.play()
                 clearInterval(intervalID)
                 
                 lewisWins.style.display = 'flex'
@@ -237,5 +239,8 @@ function draw(){
     if(maxY >=650){
         maxIncrement = 0
         jumping = false
+    }
+    if(maxY <= 200){
+        maxIncrement = 2
     }
 }
