@@ -4,7 +4,10 @@ canvas.style.border = '2px solid black'
 let intervalID = 0;
 let score = 0;
 let penaltyPoints = 0;
-let hamiltonScore = 60;
+let hamiltonScore = 120;
+
+// AUDIO
+
 
 let superMaxSound = new Audio()
 superMaxSound.src = 'sounds/superMaxLowSound.mp3'
@@ -19,6 +22,7 @@ victoryMusic.src = 'sounds/victoryMusic.mp3'
 victoryMusic.volume = 0.5
 
 
+// BEGIN AND ENDSCREENS
 
 let startGameBtn = document.querySelector('.startGameBtn')
 let splash = document.querySelector('.splash')
@@ -31,6 +35,8 @@ let lewisWins = document.querySelector('.losing-screen')
 
 let maxWins = document.querySelector('.victory-screen')
 
+
+// IMAGES USED IN GAME
 
 let bgImg = document.createElement('img');
 bgImg.src = 'images/backgroundColorGrass.png'
@@ -47,15 +53,33 @@ carImg.src = 'images/CharlesCar.png'
 let pointsImg = document.createElement('img')
 pointsImg.src = 'images/platformPack_item002.png'
 
+let blockImg = document.createElement('img')
+blockImg.src = 'images/block-to-jump.png'
+
+let longBlock = document.createElement('img')
+longBlock.src = 'images/betterLong.png'
+
+
+// OBJECTS FOR ITEMS
+
 let cars = [{x: canvas.width + 10, y:650}]
 
 let points = [{x: canvas.width + 50, y: 670}]
 
 let oilPatch = [{x: canvas.width + 100, y: 720}]
 
+let blocks = [{x: canvas.width + 50, y: 580}]
 
+
+let longBlocks = [{x: canvas.width + 50, y: 450}]
+
+let topPoints = [{x: canvas.width + 100, y: 400}]
+
+let blockY = 480
 
 let jumping = false
+
+let falling = false
 
 const maxX = 100;
 let maxY = 650;
@@ -79,7 +103,7 @@ maxIncrement = 0
 // }
 
 
-
+//ADD EVENTLISTENERS
 
 startGameBtn.addEventListener('click', () => {
     splash.style.display = 'none'
@@ -104,22 +128,22 @@ document.addEventListener('keydown', (event) => {
         maxIncrement = -5
         jumping = true
     }
-   
+    
 })
 
 document.addEventListener('keyup', () => {
     maxIncrement = 2
+    falling = true
 })
 
+
+// DRAW
 
 function draw(){
     ctx.drawImage(bgImg, 0, 0)
 
     
-    superMaxSound.play()
-    
-
-   
+    //superMaxSound.play()
     
     ctx.beginPath()
     ctx.fillStyle = "gray"
@@ -151,7 +175,7 @@ function draw(){
             // })
             if(penaltyPoints >= 10){
                 superMaxSound.src = ""
-                lewisWinSound.play()
+                //lewisWinSound.play()
                 clearInterval(intervalID)
                 lewisWins.style.display = 'flex'
             }
@@ -181,7 +205,7 @@ function draw(){
             penaltyPoints++
             if(penaltyPoints >= 10){
                 superMaxSound.src = ""
-                lewisWinSound.play()
+                //lewisWinSound.play()
                 clearInterval(intervalID)
                 
                 lewisWins.style.display = 'flex'
@@ -210,7 +234,7 @@ function draw(){
             if(score >= hamiltonScore){
                 superMaxSound.src = ""
                 hamiltonScore.src = ""
-                victoryMusic.play()
+                //victoryMusic.play()
                 clearInterval(intervalID);
                 maxWins.style.display = 'flex'
                 
@@ -219,6 +243,78 @@ function draw(){
         }
      
     }
+
+
+    // for(let i = 0; i <blocks.length; i++){
+    //     ctx.drawImage(blockImg, blocks[i].x, blocks[i].y)
+    //     blocks[i].x--
+
+    //     if(blocks[i].x == 80){
+    //         blocks.push({
+    //             x:canvas.width + 60,
+    //             y: 580
+    //         })
+    //     }
+
+    //     if((maxX+(maxImg.width/2) > blocks[i].x && maxX+(maxImg.width/2) < blocks[i].x +blockImg.width)&& maxY+maxImg.height == blockY+blockImg.height){
+    //         maxIncrement = 0
+    //     }
+    // }
+
+
+    for(let i = 0; i <longBlocks.length; i++){
+        ctx.drawImage(longBlock, longBlocks[i].x, longBlocks[i].y)
+        longBlocks[i].x--
+
+        if(longBlocks[i].x == 40){
+            longBlocks.push({
+                x:canvas.width + 60,
+                y: 450
+            })
+        }
+
+        if((maxX+maxImg.width > longBlocks[i].x && maxX+(maxImg.width/2) < longBlocks[i].x +longBlock.width)&& (maxY+maxImg.height == blockY + 20)){
+            maxIncrement = 0 
+            jumping = false
+            
+        }
+        if((maxX+maxImg.width > longBlocks[i].x && maxX+(maxImg.width/2) > longBlocks[i].x +longBlock.width)&& (maxY+maxImg.height <= blockY + 20)){
+            maxIncrement = 2
+        }
+    }
+
+
+    for(let i = 0; i <topPoints.length; i++){
+        ctx.drawImage(pointsImg, topPoints[i].x, topPoints[i].y)
+        topPoints[i].x--
+
+        if(topPoints[i].x == 40){
+            topPoints.push({
+                x:canvas.width + 60,
+                y: 400
+            })
+        }
+        if(maxX+maxImg.width >= topPoints[i].x +30 && maxX  <= topPoints[i].x + pointsImg.width  && maxY == topPoints[i].y -90 + pointsImg.height){
+            score = score +25
+            topPoints.splice(i, 1)
+            topPoints.push({
+                x:canvas.width,
+                y: 400
+            })
+            if(score >= hamiltonScore){
+                superMaxSound.src = ""
+                hamiltonScore.src = ""
+                //victoryMusic.play()
+                clearInterval(intervalID);
+                maxWins.style.display = 'flex'
+                
+    
+            }
+        }
+     
+    }
+
+
 
     
 
@@ -236,11 +332,14 @@ function draw(){
  
     maxY += maxIncrement
 
+
     if(maxY >=650){
         maxIncrement = 0
         jumping = false
+        falling = false
     }
     if(maxY <= 200){
         maxIncrement = 2
     }
-}
+    
+} 
