@@ -65,6 +65,9 @@ blockImg.src = 'images/block-to-jump.png'
 let longBlock = document.createElement('img')
 longBlock.src = 'images/betterLong.png'
 
+let planeImg = document.createElement('img')
+planeImg.src = 'images/TeamInstinctPlane.png'
+
 
 // OBJECTS FOR ITEMS
 
@@ -80,6 +83,9 @@ let blocks = [{x: canvas.width + 50, y: 580}]
 let longBlocks = [{x: canvas.width + 50, y: 450}]
 
 let topPoints = [{x: canvas.width + 200, y: 400}]
+
+
+let planes = [{x: canvas.width + 300, y: 50}]
 
 let blockY = 480
 
@@ -249,6 +255,11 @@ function draw(){
      
     }
 
+
+    for(let i = 0; i <planes.length; i++){
+        ctx.drawImage(planeImg, planes[i].x, planes[i].y)
+        planes[i].x--
+    }
 
 
     for(let i = 0; i <longBlocks.length; i++){
