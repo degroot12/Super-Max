@@ -84,22 +84,7 @@ const maxX = 100;
 let maxY = 650;
 maxIncrement = 0
 
-// const playerCar = {
-//     height: maxImg.height,
-//     jumping: true,
-//     width: maxImg.width,
-//     x: maxX,
-//     y:maxY,
-//     yVelocity: 0
-// }
 
-// const controllers = {
-//     up: false,
-//     keyListener: function (event){
-//         let key_state = (event.type == 'keydown') ? true : false;
-//         controllers.up = key_state
-//     }
-// }
 
 
 //ADD EVENTLISTENERS
@@ -142,7 +127,7 @@ function draw(){
     ctx.drawImage(bgImg, 0, 0)
 
     
-    //superMaxSound.play()
+    superMaxSound.play()
     
     ctx.beginPath()
     ctx.fillStyle = "gray"
@@ -174,7 +159,7 @@ function draw(){
             // })
             if(penaltyPoints >= 10){
                 superMaxSound.src = ""
-                //lewisWinSound.play()
+                lewisWinSound.play()
                 clearInterval(intervalID)
                 lewisWins.style.display = 'flex'
             }
@@ -204,7 +189,7 @@ function draw(){
             penaltyPoints++
             if(penaltyPoints >= 10){
                 superMaxSound.src = ""
-                //lewisWinSound.play()
+                lewisWinSound.play()
                 clearInterval(intervalID)
                 
                 lewisWins.style.display = 'flex'
@@ -233,7 +218,7 @@ function draw(){
             if(score >= hamiltonScore){
                 superMaxSound.src = ""
                 hamiltonScore.src = ""
-                //victoryMusic.play()
+                victoryMusic.play()
                 clearInterval(intervalID);
                 maxWins.style.display = 'flex'
                 
@@ -243,22 +228,6 @@ function draw(){
      
     }
 
-
-    // for(let i = 0; i <blocks.length; i++){
-    //     ctx.drawImage(blockImg, blocks[i].x, blocks[i].y)
-    //     blocks[i].x--
-
-    //     if(blocks[i].x == 80){
-    //         blocks.push({
-    //             x:canvas.width + 60,
-    //             y: 580
-    //         })
-    //     }
-
-    //     if((maxX+(maxImg.width/2) > blocks[i].x && maxX+(maxImg.width/2) < blocks[i].x +blockImg.width)&& maxY+maxImg.height == blockY+blockImg.height){
-    //         maxIncrement = 0
-    //     }
-    // }
 
 
     for(let i = 0; i <longBlocks.length; i++){
@@ -303,7 +272,7 @@ function draw(){
             if(score >= hamiltonScore){
                 superMaxSound.src = ""
                 hamiltonScore.src = ""
-                //victoryMusic.play()
+                victoryMusic.play()
                 clearInterval(intervalID);
                 maxWins.style.display = 'flex'
                 
