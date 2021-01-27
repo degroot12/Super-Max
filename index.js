@@ -133,7 +133,7 @@ playAgainBtnWin.addEventListener('click', () => {
     location.reload();
 })
 
-
+// JUMP LOGIC
 
 document.addEventListener('keydown', (event) => {
     if(event.keyCode == 32 && jumping === false){
@@ -152,11 +152,15 @@ document.addEventListener('keyup', () => {
 // DRAW
 
 function draw(){
+    //BACKGROUND
     ctx.drawImage(bgImg, 0, 0)
 
-    
+    //SUPERMAX SONG
     superMaxSound.play()
     
+
+
+    //ROAD AND CURBS
     ctx.beginPath()
     ctx.fillStyle = "gray"
     ctx.fillRect(0, 720, canvas.width, 11);
@@ -166,6 +170,9 @@ function draw(){
     ctx.drawImage(curbs, 0, 685)
 
        
+
+//SPAWNING OPPOSING CARS + LOGIC
+
     for(let i = 0; i <cars.length; i++){
         ctx.drawImage(carImg, cars[i].x, cars[i].y)
         cars[i].x = cars[i].x -2
@@ -195,7 +202,7 @@ function draw(){
 
     }
 
-
+//SPAWING OIL PATHES + LOGIC
 
 
     for(let i = 0; i <oilPatch.length; i++){
@@ -234,6 +241,10 @@ function draw(){
 
     }
     
+
+    // SPAWNING POINTS
+
+
     for(let i = 0; i <points.length; i++){
         ctx.drawImage(pointsImg, points[i].x, points[i].y)
         points[i].x--
@@ -263,35 +274,6 @@ function draw(){
         }
      
     }
-
-
-    for(let i = 0; i <planes.length; i++){
-        ctx.drawImage(planeImg, planes[i].x, planes[i].y)
-        planes[i].x--
-    }
-
-
-    for(let i = 0; i <longBlocks.length; i++){
-        ctx.drawImage(longBlock, longBlocks[i].x, longBlocks[i].y)
-        longBlocks[i].x--
-
-        if(longBlocks[i].x == 40){
-            longBlocks.push({
-                x:canvas.width + 200,
-                y: 450
-            })
-        }
-
-        if((maxX+maxImg.width > longBlocks[i].x && maxX+(maxImg.width/2) < longBlocks[i].x +longBlock.width)&& (maxY+maxImg.height == blockY + 20)){
-            maxIncrement = 0 
-            jumping = false
-            
-        }
-        if((maxX+maxImg.width > longBlocks[i].x && maxX+(maxImg.width/2) > longBlocks[i].x +longBlock.width)&& (maxY+maxImg.height <= blockY + 20)){
-            maxIncrement = 2
-        }
-    }
-
 
     for(let i = 0; i <topPoints.length; i++){
         ctx.drawImage(pointsImg, topPoints[i].x, topPoints[i].y)
@@ -325,9 +307,47 @@ function draw(){
 
 
 
+// PLANE WITH BANNER
+
+
+    for(let i = 0; i <planes.length; i++){
+        ctx.drawImage(planeImg, planes[i].x, planes[i].y)
+        planes[i].x--
+    }
+
+
+    // SPAWNING BLOCKS
+
+
+
+    for(let i = 0; i <longBlocks.length; i++){
+        ctx.drawImage(longBlock, longBlocks[i].x, longBlocks[i].y)
+        longBlocks[i].x--
+
+        if(longBlocks[i].x == 40){
+            longBlocks.push({
+                x:canvas.width + 200,
+                y: 450
+            })
+        }
+
+        if((maxX+maxImg.width > longBlocks[i].x && maxX+(maxImg.width/2) < longBlocks[i].x +longBlock.width)&& (maxY+maxImg.height == blockY + 20)){
+            maxIncrement = 0 
+            jumping = false
+            
+        }
+        if((maxX+maxImg.width > longBlocks[i].x && maxX+(maxImg.width/2) > longBlocks[i].x +longBlock.width)&& (maxY+maxImg.height <= blockY + 20)){
+            maxIncrement = 2
+        }
+    }
+
+
     
+//DRAWING MAX CAR
 
     ctx.drawImage(maxImg, maxX, maxY)
+
+//SCORE 
 
     ctx.font ='20px Verdana'
     ctx.fillText('Score: ' + score, 10, 30)
