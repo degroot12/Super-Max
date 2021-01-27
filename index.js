@@ -5,6 +5,7 @@ let intervalID = 0;
 let score = 0;
 let penaltyPoints = 0;
 let hamiltonScore = 250;
+let lives = 10
 
 // AUDIO
 
@@ -35,6 +36,11 @@ let lewisWins = document.querySelector('.losing-screen')
 
 let maxWins = document.querySelector('.victory-screen')
 
+let easyBtn = document.querySelector('.easyBtn')
+
+let mediumBtn = document.querySelector('.mediumBtn')
+
+let hardBtn = document.querySelector('.hardBtn')
 
 // IMAGES USED IN GAME
 
@@ -89,6 +95,19 @@ maxIncrement = 0
 
 //ADD EVENTLISTENERS
 
+easyBtn.addEventListener('click', () => {
+    hamiltonScore = 100
+})
+
+mediumBtn.addEventListener('click', () => {
+    hamiltonScore = 250
+})
+
+hardBtn.addEventListener('click', () => {
+    hamiltonScore = 400
+    lives = 3
+})
+
 startGameBtn.addEventListener('click', () => {
     splash.style.display = 'none'
     lewisWins.style.display = 'none'
@@ -106,6 +125,8 @@ playAgainBtn.addEventListener('click', () => {
 playAgainBtnWin.addEventListener('click', () => {
     location.reload();
 })
+
+
 
 document.addEventListener('keydown', (event) => {
     if(event.keyCode == 32 && jumping === false){
@@ -157,7 +178,7 @@ function draw(){
             //     x:canvas.width + 60,
             //     y: 650
             // })
-            if(penaltyPoints >= 10){
+            if(penaltyPoints >= lives){
                 superMaxSound.src = ""
                 lewisWinSound.play()
                 clearInterval(intervalID)
@@ -187,7 +208,7 @@ function draw(){
         if(maxX+maxImg.width== oilPatch[i].x +30 && maxY >= oilPatch[i].y - 71){
             score = score -12
             penaltyPoints++
-            if(penaltyPoints >= 10){
+            if(penaltyPoints >= lives){
                 superMaxSound.src = ""
                 lewisWinSound.play()
                 clearInterval(intervalID)
