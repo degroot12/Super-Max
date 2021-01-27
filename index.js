@@ -53,8 +53,6 @@ curbs.src = 'images/curbs.png'
 let maxImg = document.createElement('img');
 maxImg.src = 'images/MaxCarScaled.png'
 
-let maxReverse = document.createElement('img')
-maxReverse = 'images/MaxCarReverse.png'
 
 let carImg = document.createElement('img')
 carImg.src = 'images/CharlesCar.png'
