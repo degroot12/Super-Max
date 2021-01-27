@@ -4,7 +4,7 @@ canvas.style.border = '2px solid black'
 let intervalID = 0;
 let score = 0;
 let penaltyPoints = 0;
-let hamiltonScore = 120;
+let hamiltonScore = 250;
 
 // AUDIO
 
@@ -73,13 +73,12 @@ let blocks = [{x: canvas.width + 50, y: 580}]
 
 let longBlocks = [{x: canvas.width + 50, y: 450}]
 
-let topPoints = [{x: canvas.width + 100, y: 400}]
+let topPoints = [{x: canvas.width + 200, y: 400}]
 
 let blockY = 480
 
 let jumping = false
 
-let falling = false
 
 const maxX = 100;
 let maxY = 650;
@@ -133,7 +132,7 @@ document.addEventListener('keydown', (event) => {
 
 document.addEventListener('keyup', () => {
     maxIncrement = 2
-    falling = true
+
 })
 
 
@@ -268,7 +267,7 @@ function draw(){
 
         if(longBlocks[i].x == 40){
             longBlocks.push({
-                x:canvas.width + 60,
+                x:canvas.width + 200,
                 y: 450
             })
         }
@@ -288,17 +287,17 @@ function draw(){
         ctx.drawImage(pointsImg, topPoints[i].x, topPoints[i].y)
         topPoints[i].x--
 
-        if(topPoints[i].x == 40){
+        if(topPoints[i].x == 10){
             topPoints.push({
                 x:canvas.width + 60,
                 y: 400
             })
         }
-        if(maxX+maxImg.width >= topPoints[i].x +30 && maxX  <= topPoints[i].x + pointsImg.width  && maxY == topPoints[i].y -90 + pointsImg.height){
+        if(maxX+maxImg.width >= topPoints[i].x +30 && maxX  <= topPoints[i].x + pointsImg.width  && maxY <= topPoints[i].y  + pointsImg.height){
             score = score +25
             topPoints.splice(i, 1)
             topPoints.push({
-                x:canvas.width,
+                x:canvas.width + 60,
                 y: 400
             })
             if(score >= hamiltonScore){
@@ -336,7 +335,7 @@ function draw(){
     if(maxY >=650){
         maxIncrement = 0
         jumping = false
-        falling = false
+        
     }
     if(maxY <= 200){
         maxIncrement = 2
