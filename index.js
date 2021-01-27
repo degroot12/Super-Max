@@ -353,7 +353,7 @@ function draw(){
     ctx.fillText('Score: ' + score, 10, 30)
 
     ctx.font = '20px Verdana'
-    ctx.fillText('Penalty points: ' + penaltyPoints, 10, 80)
+    ctx.fillText('Penalty points: ' + penaltyPoints + `/${lives}`, 10, 80 )
 
     ctx.font = '20px Verdana'
     ctx.fillText('Hamilton: ' + hamiltonScore, canvas.width-150, 30)
