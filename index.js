@@ -53,6 +53,9 @@ curbs.src = 'images/curbs.png'
 let maxImg = document.createElement('img');
 maxImg.src = 'images/MaxCarScaled.png'
 
+let maxReverse = document.createElement('img')
+maxReverse = 'images/MaxCarReverse.png'
+
 let carImg = document.createElement('img')
 carImg.src = 'images/CharlesCar.png'
 
@@ -214,6 +217,14 @@ function draw(){
         if(maxX+maxImg.width== oilPatch[i].x +30 && maxY >= oilPatch[i].y - 71){
             score = score -12
             penaltyPoints++
+            maxImg.src = 'images/MaxCarReverse.png'
+
+            function reverseBack() {
+                maxImg.src = 'images/MaxCarScaled.png'
+              }
+              
+              setTimeout(reverseBack, 300);
+
             if(penaltyPoints >= lives){
                 superMaxSound.src = ""
                 lewisWinSound.play()
