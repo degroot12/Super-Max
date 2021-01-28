@@ -4,60 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Max</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <link href="/fontawesome/css/all.css" rel="stylesheet">
 </head>
 <body>
     <div class="splash">
+        <div>
+            
+            <button class="muteBtn"><i class="fas fa-play"></i></button>
+        </div>
         <div class="text-btn">
             <div class="title">
-                <h1>Welcome to the game</h1>     
-                <div class="text">
-                    <p>Objective: Beat Hamilton in the Championship<br>
-                        <br>
-                        Avoid cars and oil, they give you penalty points<br>
-                        if you have too many pentaly points, you lose.<br>
-                        <br>
-                        Collects Coins<br>
-                        If you have more points than hamilton you win<br>
-                        <br>
-                        Use SPACEBAR to jump<br>
-                        The longer you hold, the higher you jump<br>
-                        <br>
-                        Try to collect the key to unlock a secret bonus level!<br>
-                        <br>
-                        Turn the music on for MAXimum enjoyment!
-                    </p>
-                    
-                </div>
-                <div>
-                    <button class="muteBtn">Turn the music on!</button>
-                </div>
+                <h1>SUPERMAX</h1>
+                <h5>the game</h5>
+                
+            </div>
+              
                 <br>
                 <div>
                     <audio autoplay id="startSong">
                         <source src="./sounds/startScreenSong.mp3" type="audio/ogg">
                     </audio>
                 </div>
-            </div>
+            
             <div class="easy">
                 <h3>Difficulty</h3>
-                <button class="easyBtn difficultyLvl">Easy</button>
-                <button class="mediumBtn difficultyLvl">Medium</button>
-                <button class="hardBtn difficultyLvl">Hard</button>
+                <div class="btn-group">
+                    <button class="easyBtn difficultyLvl">Easy</button>
+                    <button class="mediumBtn difficultyLvl">Medium</button>
+                    <button class="hardBtn difficultyLvl">Hard</button>
+                </div>
+                    <div class="startBtn"></div>
+                    <button class="startGameBtn">Start Game</button>
+                </div>
             </div>
 
-            <div class="startBtn"></div>
-                <button class="startGameBtn">Start Game</button>
-            </div>
+            
         </div>
         <div class="losing-screen">
             <div class="play-again">
+                <header>
+                    <div class="header-text">
+                        <h4>SUPERMAX</h4>
+                        <h6>the game</h6>
+                    </div>
+                    <div class="pauseBtn">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </header>
                 <div class="lewisWin">
                     <h1>You lost</h1>             
                 </div>
-                <div class="playAgain"></div>
+                <div class="playAgain">
                     <button class="playAgainBtn">Play Again</button>
                 </div>
+            </div>
         </div>
         <div class="victory-screen">
             <div class="play-again">
