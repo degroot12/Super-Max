@@ -57,8 +57,6 @@ const bulletImg = document.createElement('img')
 bulletImg.src = 'images/bullet.png'
 const zombieImg = document.createElement('img')
 zombieImg.src = 'images/ZombieCar.png'
-const blockImg = document.createElement('img')
-blockImg.src = 'images/block-to-jump.png'
 const longBlock = document.createElement('img')
 longBlock.src = 'images/betterLong.png'
 const planeImg = document.createElement('img')
@@ -103,10 +101,10 @@ hardBtn.addEventListener('click', () => {
 
 muteBtn.addEventListener('click', () => {
     if(volumeOff){
-        superMaxSound.volume = 0.2
-        lewisWinSound.volume = 0.2
-        victoryMusic.volume = 0.2
-        startSong.volume = 0.2
+        superMaxSound.volume = 0.3
+        lewisWinSound.volume = 0.3
+        victoryMusic.volume = 0.3
+        startSong.volume = 0.3
         volumeOff = false
         muteBtn.innerText = 'Turn the music off'
     }
