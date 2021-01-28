@@ -7,25 +7,25 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <div class="splash">
-        
         <div class="text-btn">
             <div class="title">
-                <h1>Welcome to the game</h1>
-                
+                <h1>Welcome to the game</h1>     
                 <div class="text">
                     <p>Objective: Beat Hamilton in the Championship<br>
+                        <br>
                         Avoid cars and oil, they give you penalty points<br>
                         if you have too many pentaly points, you lose.<br>
+                        <br>
                         Collects Coins<br>
                         If you have more points than hamilton you win<br>
+                        <br>
                         Use SPACEBAR to jump<br>
                         The longer you hold, the higher you jump<br>
-<br>
+                        <br>
                         Try to collect the key to unlock a secret bonus level!<br>
                         <br>
-                        Turn the sound on for MAXimum enjoyment!
+                        Turn the music on for MAXimum enjoyment!
                     </p>
                     
                 </div>
@@ -33,20 +33,17 @@
                     <button class="muteBtn">Turn the music on!</button>
                 </div>
                 <br>
-                <!-- <iframe src="silence.mp3" allow="autoplay" id="audio" style="display: none"></iframe> -->
                 <div>
-                    <audio autoplay controls >
+                    <audio autoplay id="startSong">
                         <source src="./sounds/startScreenSong.mp3" type="audio/ogg">
                     </audio>
                 </div>
-                
-                
             </div>
             <div class="easy">
                 <h3>Difficulty</h3>
-                <button class="easyBtn">Easy</button>
-                <button class="mediumBtn">Medium</button>
-                <button class="hardBtn">Hard</button>
+                <button class="easyBtn difficultyLvl">Easy</button>
+                <button class="mediumBtn difficultyLvl">Medium</button>
+                <button class="hardBtn difficultyLvl">Hard</button>
             </div>
 
             <div class="startBtn"></div>
@@ -62,7 +59,6 @@
                     <button class="playAgainBtn">Play Again</button>
                 </div>
         </div>
-
         <div class="victory-screen">
             <div class="play-again">
                 <div class="MaxWin">
@@ -71,11 +67,9 @@
                 <div class="playAgain"></div>
                     <button class="playAgainBtnWin">Play Again</button>
                 </div>
-        </div>
-       
+        </div> 
     </div>
     <canvas id="myCanvas" width="900" height="790"></canvas>
     <script src="index.js"></script>
-    
 </body>
 </html>

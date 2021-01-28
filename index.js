@@ -19,6 +19,9 @@ lewisWinSound.volume = 0
 let victoryMusic = new Audio()
 victoryMusic.src = 'sounds/victoryMusic.mp3'
 victoryMusic.volume = 0
+const startSong = document.getElementById('startSong')
+startSong.volume = 0
+let volumeOff = true
 
 
 
@@ -99,9 +102,20 @@ hardBtn.addEventListener('click', () => {
 })
 
 muteBtn.addEventListener('click', () => {
-    superMaxSound.volume = 0.2
-    lewisWinSound.volume = 0.2
-    victoryMusic.volume = 0.2
+    if(volumeOff){
+        superMaxSound.volume = 0.2
+        lewisWinSound.volume = 0.2
+        victoryMusic.volume = 0.2
+        startSong.volume = 0.2
+        volumeOff = false
+    }
+    else {
+        superMaxSound.volume = 0
+        lewisWinSound.volume = 0
+        victoryMusic.volume = 0
+        startSong.volume = 0
+        volumeOff = true
+    }
 
 })
 
