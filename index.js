@@ -67,7 +67,7 @@ const pointsImg = document.createElement('img')
 pointsImg.src = 'images/platformPack_item002.png'
 
 const boostImg = document.createElement('img')
-boostImg.src = 'images/platformPack_item018.png'
+boostImg.src = 'images/platformPack_item014.png'
 
 const bulletImg = document.createElement('img')
 bulletImg.src = 'images/bullet.png'
