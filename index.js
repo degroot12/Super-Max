@@ -356,7 +356,7 @@ function draw(){
 
         if(boosts[i].x == 40 && (normalGame)){
             boosts.push({
-                x:canvas.width + 60,
+                x:canvas.width + 500,
                 y: 670
             })
         }
