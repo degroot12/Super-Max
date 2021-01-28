@@ -6,20 +6,16 @@ let score = 0;
 let penaltyPoints = 0;
 let hamiltonScore = 250;
 let lives = 10
-
 let zombieCarsKilled = 0
 
 // AUDIO
 
-
 let superMaxSound = new Audio()
 superMaxSound.src = 'sounds/superMaxLowSound.mp3'
 superMaxSound.volume = 0
-
 let lewisWinSound = new Audio()
 lewisWinSound.src = 'sounds/losingSound.mp3'
 lewisWinSound.volume = 0
-
 let victoryMusic = new Audio()
 victoryMusic.src = 'sounds/victoryMusic.mp3'
 victoryMusic.volume = 0
@@ -31,99 +27,60 @@ victoryMusic.volume = 0
 
 const startGameBtn = document.querySelector('.startGameBtn')
 const splash = document.querySelector('.splash')
-
 const playAgainBtn = document.querySelector('.playAgainBtn')
-
 const playAgainBtnWin = document.querySelector('.playAgainBtnWin')
-
 const lewisWins = document.querySelector('.losing-screen')
-
 const maxWins = document.querySelector('.victory-screen')
-
 const easyBtn = document.querySelector('.easyBtn')
-
 const mediumBtn = document.querySelector('.mediumBtn')
-
 const hardBtn = document.querySelector('.hardBtn')
-
 const muteBtn = document.querySelector('.muteBtn')
 
 // IMAGES USED IN GAME
 
 const bgImg = document.createElement('img');
 bgImg.src = 'images/backgroundColorGrass.png'
-
 const curbs = document.createElement('img')
 curbs.src = 'images/curbs.png'
-
 const maxImg = document.createElement('img');
 maxImg.src = 'images/MaxCarScaled.png'
-
-
 const carImg = document.createElement('img')
 carImg.src = 'images/CharlesCar.png'
-
 const pointsImg = document.createElement('img')
 pointsImg.src = 'images/platformPack_item002.png'
-
 const boostImg = document.createElement('img')
 boostImg.src = 'images/platformPack_item014.png'
-
 const bulletImg = document.createElement('img')
 bulletImg.src = 'images/bullet.png'
-
 const zombieImg = document.createElement('img')
 zombieImg.src = 'images/ZombieCar.png'
-
-
 const blockImg = document.createElement('img')
 blockImg.src = 'images/block-to-jump.png'
-
 const longBlock = document.createElement('img')
 longBlock.src = 'images/betterLong.png'
-
 const planeImg = document.createElement('img')
 planeImg.src = 'images/TeamInstinctPlane.png'
-
 
 // OBJECTS FOR ITEMS
 
 let cars = [{x: canvas.width + 10, y:650}]
-
 let points = [{x: canvas.width + 50, y: 670}]
-
 let oilPatch = [{x: canvas.width + 100, y: 720}]
-
 let boosts = [{x: canvas.width + 300, y: 670}]
-
 let longBlocks = [{x: canvas.width + 50, y: 450}]
-
 let topPoints = [{x: canvas.width + 200, y: 400}]
-
 let zombieCars = [{x: canvas.width + 200, y: 690}]
-
 
 let bulletX = 190
 let bullets = [{x: 190, y: 750}]
-
-
 let planes = [{x: canvas.width + 300, y: 50}]
-
 let blockY = 480
-
 let jumping = false
-
 let normalGame = true
-
 
 const maxX = 100;
 let maxY = 650;
 let maxIncrement = 0
-
-
-
-
-
 
 //ADD EVENTLISTENERS
 
@@ -142,9 +99,9 @@ hardBtn.addEventListener('click', () => {
 })
 
 muteBtn.addEventListener('click', () => {
-    superMaxSound.volume = 0.5
-    lewisWinSound.volume = 0.5
-    victoryMusic.volume = 0.5
+    superMaxSound.volume = 0.2
+    lewisWinSound.volume = 0.2
+    victoryMusic.volume = 0.2
 
 })
 
@@ -173,10 +130,6 @@ document.addEventListener('keydown', (event) => {
         maxIncrement = -5
         jumping = true
     }
-    // if(event.keyCode == 32 &&(!normalGame)){
-    //     bullets.push({x: bulletX, y: 750})
-    // }
-    
 })
 
 document.addEventListener('keyup', () => {
@@ -187,8 +140,6 @@ document.addEventListener('keyup', () => {
 
 })
 
-
-
 // DRAW
 
 function draw(){
@@ -197,8 +148,6 @@ function draw(){
 
     //SUPERMAX SONG
     superMaxSound.play()
-    
-
 
     //ROAD AND CURBS
     ctx.beginPath()
@@ -208,8 +157,6 @@ function draw(){
     ctx.closePath()
 
     ctx.drawImage(curbs, 0, 685)
-
-       
 
 //SPAWNING OPPOSING CARS + LOGIC
 
@@ -228,10 +175,7 @@ function draw(){
             score = score -12
             penaltyPoints++
             cars.splice(i, 1)
-            // cars.push({
-            //     x:canvas.width + 60,
-            //     y: 650
-            // })
+     
             if(penaltyPoints >= lives){
                 superMaxSound.src = ""
                 lewisWinSound.play()
@@ -243,7 +187,6 @@ function draw(){
     }
 
 //SPAWING OIL PATHES + LOGIC
-
 
     for(let i = 0; i <oilPatch.length; i++){
         ctx.beginPath()
@@ -281,9 +224,7 @@ function draw(){
 
     }
     
-
     // SPAWNING POINTS
-
 
     for(let i = 0; i <points.length; i++){
         ctx.drawImage(pointsImg, points[i].x, points[i].y)
@@ -308,14 +249,10 @@ function draw(){
                 victoryMusic.play()
                 clearInterval(intervalID);
                 maxWins.style.display = 'flex'
-                
-    
             }
         }
-     
     }
     
-
     for(let i = 0; i <topPoints.length; i++){
         ctx.drawImage(pointsImg, topPoints[i].x, topPoints[i].y)
         topPoints[i].x--
@@ -338,15 +275,10 @@ function draw(){
                 hamiltonScore.src = ""
                 victoryMusic.play()
                 clearInterval(intervalID);
-                maxWins.style.display = 'flex'
-                
-    
+                maxWins.style.display = 'flex'     
             }
         }
-     
     }
-
-    
 
     // BONUS GAME
 
@@ -371,7 +303,6 @@ function draw(){
             normalGame = false
             bgImg.src = 'images/backgroundDarkWhite.png'
         }
-     
     }
     if(!normalGame){
         for(let i = 0; i <zombieCars.length; i++){
@@ -400,8 +331,6 @@ function draw(){
         for(let j = 0; j <bullets.length; j++){
             ctx.drawImage(bulletImg, bullets[j].x, bullets[j].y)
             bullets[j].x++
-
-            
 
             if(bullets[j].x >= zombieCars[i].x +30){
                 zombieCars.splice(i, 1)
@@ -433,11 +362,8 @@ function draw(){
                         x:canvas.width + 60,
                         y: 400
                     })
-
                 }
             }
-
-
         }
 
             document.addEventListener('keydown', (event) => {
@@ -446,11 +372,9 @@ function draw(){
                         x: 190,
                         y: 750
                     })
-                }
-                
+                }   
             })
           
-    
             if(maxX+maxImg.width >= zombieCars[i].x +30 && maxX  <= zombieCars[i].x + zombieImg.width && maxY >= zombieCars[i].y){
                 score = score -12
                 penaltyPoints++
@@ -463,27 +387,17 @@ function draw(){
                     lewisWins.style.display = 'flex'
                 }
             }
-    
         }
     }
-    
-
-
-
-
 
 // PLANE WITH BANNER
-
 
     for(let i = 0; i <planes.length; i++){
         ctx.drawImage(planeImg, planes[i].x, planes[i].y)
         planes[i].x--
     }
 
-
     // SPAWNING BLOCKS
-
-
 
     for(let i = 0; i <longBlocks.length; i++){
         ctx.drawImage(longBlock, longBlocks[i].x, longBlocks[i].y)
@@ -498,16 +412,13 @@ function draw(){
 
         if((maxX+maxImg.width > longBlocks[i].x && maxX+(maxImg.width/2) < longBlocks[i].x +longBlock.width)&& (maxY+maxImg.height == blockY + 20)){
             maxIncrement = 0 
-            jumping = false
-            
+            jumping = false  
         }
         if((maxX+maxImg.width > longBlocks[i].x && maxX+(maxImg.width/2) > longBlocks[i].x +longBlock.width)&& (maxY+maxImg.height <= blockY + 20)){
             maxIncrement = 2
         }
     }
 
-
-    
 //DRAWING MAX CAR
 
     ctx.drawImage(maxImg, maxX, maxY)
@@ -523,17 +434,13 @@ function draw(){
     ctx.font = '20px Verdana'
     ctx.fillText('Hamilton: ' + hamiltonScore, canvas.width-150, 30)
 
- 
     maxY += maxIncrement
-
 
     if(maxY >=650){
         maxIncrement = 0
         jumping = false
-        
     }
     if(maxY <= 200){
         maxIncrement = 2
     }
-    
 } 
