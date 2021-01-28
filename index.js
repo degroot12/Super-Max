@@ -94,7 +94,7 @@ let points = [{x: canvas.width + 50, y: 670}]
 
 let oilPatch = [{x: canvas.width + 100, y: 720}]
 
-let boosts = [{x: canvas.width + 10, y: 670}]
+let boosts = [{x: canvas.width + 300, y: 670}]
 
 let longBlocks = [{x: canvas.width + 50, y: 450}]
 
@@ -129,6 +129,7 @@ let maxIncrement = 0
 
 easyBtn.addEventListener('click', () => {
     hamiltonScore = 100
+    lives = 25
 })
 
 mediumBtn.addEventListener('click', () => {
@@ -384,14 +385,23 @@ function draw(){
                 })
             }
 
+            ctx.beginPath()
+            ctx.font ='20px Verdana'
+            ctx.fillStyle = 'yellow'
+            ctx.fillText('UNDERGROUNDS CARS KILLED: ' + zombieCarsKilled + `/10`, 300, 50)
+            ctx.closePath()
+
+            ctx.beginPath()
+            ctx.font ='20px Verdana'
+            ctx.fillStyle = 'yellow'
+            ctx.fillText('PRESS SPACEBAR TO SHOOT', 300, 120)
+            ctx.closePath()
+
         for(let j = 0; j <bullets.length; j++){
             ctx.drawImage(bulletImg, bullets[j].x, bullets[j].y)
             bullets[j].x++
 
-            ctx.font ='50px Verdana'
-            ctx.font.style = 'yellow'
-            ctx.fillText('UNDERGROUNDS CARS KILLED: ' + zombieCarsKilled + `/10`, 10, 30)
-
+            
 
             if(bullets[j].x >= zombieCars[i].x +30){
                 zombieCars.splice(i, 1)
@@ -402,7 +412,7 @@ function draw(){
                 bullets.splice(j, 1)
                 
                 zombieCarsKilled++
-                if(zombieCarsKilled > 10){
+                if(zombieCarsKilled === 10){
                     maxImg.src = 'images/MaxCarScaled.png'
                     maxY = 650
                     normalGame = true
