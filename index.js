@@ -106,7 +106,7 @@ muteBtn.addEventListener('click', () => {
         victoryMusic.volume = 0.3
         startSong.volume = 0.3
         volumeOff = false
-        muteBtn.innerHTML = 'Turn the music off</i>'
+        muteBtn.innerHTML = 'Turn the music off'
     }
     else {
         superMaxSound.volume = 0
