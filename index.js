@@ -106,7 +106,7 @@ muteBtn.addEventListener('click', () => {
         victoryMusic.volume = 0.3
         startSong.volume = 0.3
         volumeOff = false
-        muteBtn.innerHTML = '<i class="fas fa-pause"></i>'
+        muteBtn.innerHTML = 'Turn the music off</i>'
     }
     else {
         superMaxSound.volume = 0
@@ -114,7 +114,7 @@ muteBtn.addEventListener('click', () => {
         victoryMusic.volume = 0
         startSong.volume = 0
         volumeOff = true
-        muteBtn.innerHTML = '<i class="fas fa-play"></i>'
+        muteBtn.innerHTML = 'Turn the music on!'
     }
 
 })
