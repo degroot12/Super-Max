@@ -3,7 +3,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
     top: 0;
     left: 0;
     width: 100%;
@@ -13,7 +12,6 @@
     z-index: 200;
     color: white;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-    /* text-align: center; */
     background-repeat: no-repeat;
     font-family: 'Audiowide';
     font-weight: 100;
@@ -33,17 +31,8 @@ h1{
 
 .easy{
     text-align: center;
-    margin-top: 150px;
+    margin-top: 100px;
 }
-
-/* button{
-    width: 200px;
-    border-radius: 10px;
-    font-size: 17px;
-    padding: 6px 31px;
-    text-decoration: none;
-    background-color: #ffffff
-} */
 
 p{
     width:600px;
@@ -58,7 +47,6 @@ p{
 .text-btn{
     margin-bottom: 150px;
 }
-
 
 .losing-screen{
     position: fixed;
@@ -87,7 +75,7 @@ p{
     position: fixed;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-content: center;
     justify-content: center;
     top: 0;
     left: 0;
@@ -99,33 +87,15 @@ p{
     ), url(./images/maxChampagne.jpg);
     z-index: 100;
     color: white;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     text-align: center;
     background-repeat: no-repeat;
     font-family: 'Audiowide';
 }
 
-/* canvas {
+.topBtn{
     display: flex;
-    justify-content: center;
-    align-items: center;
-} */
-
-/* .difficultyLvl{
-    border-radius: 10px;
-    font-size: 17px;
-    padding: 6px 31px;
-    text-decoration: none;
-    background-color: #ffffff
-} */
-
-/* button:focus{
-    background-color: #9bb0b0;
-} */
-/* 
-.muteBtn{
-    width: 250px;
-} */
+    align-self: flex-end;
+}
 
 .easyBtn {
     border-radius: 0.8rem 0 0 0.8rem;
@@ -180,22 +150,19 @@ p{
     padding-bottom: 5px;
     padding-top: 5px;
 }
-/* .play-again{
-    background:
-  linear-gradient(
-    rgba(0, 0, 0, 0.5),
-    rgba(0, 0, 0, 0.5)
-  )
-} */
 
 h6{
     margin-top: 0;
 }
 
-header {
+.header {
     top: 0;
     position: fixed;
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+
 }
 .header-text {
     text-align: left;
@@ -212,4 +179,22 @@ h4 {
 
 h5{
     margin-top: 0;
+}
+
+.muteBtn {
+    margin-top: 20px;
+    margin-right: 20px;
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+    outline: inherit;;
+    display: flex;
+}
+
+.instructions {
+    display: flex;
+    justify-content: center;
 }

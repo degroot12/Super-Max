@@ -12,16 +12,16 @@ let zombieCarsKilled = 0
 
 let superMaxSound = new Audio()
 superMaxSound.src = 'sounds/superMaxLowSound.mp3'
-superMaxSound.volume = 0
+superMaxSound.volume = 0.3
 let lewisWinSound = new Audio()
 lewisWinSound.src = 'sounds/losingSound.mp3'
-lewisWinSound.volume = 0
+lewisWinSound.volume = 0.3
 let victoryMusic = new Audio()
 victoryMusic.src = 'sounds/victoryMusic.mp3'
-victoryMusic.volume = 0
+victoryMusic.volume = 0.3
 const startSong = document.getElementById('startSong')
-startSong.volume = 0
-let volumeOff = true
+startSong.volume = 0.3
+let volumeOff = false
 
 
 
@@ -106,7 +106,7 @@ muteBtn.addEventListener('click', () => {
         victoryMusic.volume = 0.3
         startSong.volume = 0.3
         volumeOff = false
-        muteBtn.innerText = 'Turn the music off'
+        muteBtn.innerHTML = '<i class="fas fa-pause"></i>'
     }
     else {
         superMaxSound.volume = 0
@@ -114,7 +114,7 @@ muteBtn.addEventListener('click', () => {
         victoryMusic.volume = 0
         startSong.volume = 0
         volumeOff = true
-        muteBtn.innerText = 'Turn the music on!'
+        muteBtn.innerHTML = '<i class="fas fa-play"></i>'
     }
 
 })

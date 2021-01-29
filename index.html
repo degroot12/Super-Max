@@ -11,18 +11,18 @@
 </head>
 <body>
     <div class="splash">
-        <div>
-            
-            <button class="muteBtn"><i class="fas fa-play"></i></button>
+        <div class="topBtn">
+            <button class="muteBtn"><i class="fas fa-pause"></i></button>
         </div>
         <div class="text-btn">
             <div class="title">
                 <h1>SUPERMAX</h1>
-                <h5>the game</h5>
-                
+                <h5>the game</h5>    
             </div>
-              
                 <br>
+            <div class="instructions">
+                <h4>Press Spacebar to jump</h4>
+            </div>
                 <div>
                     <audio autoplay id="startSong">
                         <source src="./sounds/startScreenSong.mp3" type="audio/ogg">
@@ -45,15 +45,13 @@
         </div>
         <div class="losing-screen">
             <div class="play-again">
-                <header>
+                <div class="header">
                     <div class="header-text">
                         <h4>SUPERMAX</h4>
                         <h6>the game</h6>
                     </div>
-                    <div class="pauseBtn">
-                        <i class="fas fa-play"></i>
-                    </div>
-                </header>
+                    <button class="muteBtn"><i class="fas fa-pause"></i></button>
+                </div>
                 <div class="lewisWin">
                     <h1>You lost</h1>             
                 </div>
@@ -64,6 +62,13 @@
         </div>
         <div class="victory-screen">
             <div class="play-again">
+                <div class="header">
+                    <div class="header-text">
+                        <h4>SUPERMAX</h4>
+                        <h6>the game</h6>
+                    </div>
+                    <button class="muteBtn"><i class="fas fa-pause"></i></button>
+                </div>
                 <div class="MaxWin">
                     <h1>You Won!</h1>             
                 </div>
