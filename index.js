@@ -38,6 +38,8 @@ const easyBtn = document.querySelector('.easyBtn')
 const mediumBtn = document.querySelector('.mediumBtn')
 const hardBtn = document.querySelector('.hardBtn')
 const muteBtn = document.querySelector('.muteBtn')
+const winBtn = document.querySelector('.winBtn')
+const loseBtn = document.querySelector('.loseBtn')
 
 // IMAGES USED IN GAME
 
@@ -117,6 +119,32 @@ muteBtn.addEventListener('click', () => {
         muteBtn.innerHTML = 'Turn the music on!'
     }
 
+})
+
+winBtn.addEventListener('click', () => {
+    if(volumeOff){
+        victoryMusic.volume = 0.3
+        volumeOff = false
+        winBtn.innerHTML = 'Turn the music off'
+    }
+    else {
+        victoryMusic.volume = 0
+        volumeOff = true
+        winBtn.innerHTML = 'Turn the music on!'
+    }
+})
+
+loseBtn.addEventListener('click', () => {
+    if(volumeOff){
+        lewisWinSound.volume = 0.3
+        volumeOff = false
+        loseBtn.innerHTML = 'Turn the music off'
+    }
+    else {
+        lewisWinSound.volume = 0
+        volumeOff = true
+        loseBtn.innerHTML = 'Turn the music on!'
+    }
 })
 
 startGameBtn.addEventListener('click', () => {
